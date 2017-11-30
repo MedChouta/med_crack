@@ -1,9 +1,8 @@
-#rstrip() deletes the special characters
 from hashlib import *
 import sys
 
 if len(sys.argv) < 3:
-    print "\nUsage: med_crack.py [Hash_File] [Dictionary] [Algorithm]\n"
+    print "\nUsage: python med_crack.py [Hash_File] [Dictionary] [Algorithm]\n"
     sys.exit()
 
 try:
