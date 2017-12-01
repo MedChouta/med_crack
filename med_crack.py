@@ -2,7 +2,7 @@ from hashlib import *
 import sys
 
 if len(sys.argv) < 3:
-    print "\nUsage: python med_crack.py [Hash_File] [Dictionary] [Algorithm]\n"
+    print "\nUsage: med_crack.py [Hash_File] [Dictionary] [Algorithm]\n"
     sys.exit()
 
 try:
@@ -22,9 +22,10 @@ Algorithms = {
 
 def crack(hash_file, dictionary, alg):
     for line in hash_file:
-        print line
+        crackingString = "Cracking {}".format(line)
+        print crackingString + (len(crackingString)-1)*"-"
         for line2 in dictionary:
-            print "comparing " + line.rstrip() + " & " + line2.rstrip()
+            print "Testing: '"+line2.rstrip()+"'"
             if  line.rstrip() == alg(line2.rstrip()).hexdigest():
                 print "MATCH FOUND: " + line.rstrip() + " == " + line2
                 dictionary.seek(0)
@@ -35,6 +36,7 @@ def crack(hash_file, dictionary, alg):
 try:
     crack(hash_file, dictionary, Algorithms[sys.argv[3]])
 except:
+    print sys.exc_info()[0]
     print "Supported algorithms: \nmd5\nsha1\nsha224\nsha256\nsha384\nsha512"
 
 hash_file.close()
