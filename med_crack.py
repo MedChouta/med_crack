@@ -1,5 +1,5 @@
 from hashlib import *
-import sys
+import sys, time
 
 if len(sys.argv) < 3:
     print "\nUsage: med_crack.py [Hash_File] [Dictionary] [Algorithm]\n"
@@ -33,11 +33,16 @@ def crack(hash_file, dictionary, alg):
             else:
                 print "no match found\n"
         dictionary.seek(0)
+start = time.time()
 try:
     crack(hash_file, dictionary, Algorithms[sys.argv[3]])
 except:
     print sys.exc_info()[0]
     print "Supported algorithms: \nmd5\nsha1\nsha224\nsha256\nsha384\nsha512"
+end = time.time()
+elapsedTime = end - start
+
+print "Elapsed time: "+str(elapsedTime)+"s"
 
 hash_file.close()
 dictionary.close()
