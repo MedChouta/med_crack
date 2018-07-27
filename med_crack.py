@@ -25,9 +25,9 @@ def crack(hash_file, dictionary, alg):
         crackingString = "Cracking {}".format(line)
         print crackingString + (len(crackingString)-1)*"-"
         for line2 in dictionary:
-            print "Testing: '"+line2.rstrip()+"'"
+            print("Testing: '{}'".format(line2.rstrip()))
             if  line.rstrip() == alg(line2.rstrip()).hexdigest():
-                print "MATCH FOUND: " + line.rstrip() + " == " + line2
+                print("MATCH FOUND: {} == {}".format(line.rstrip(), line2))
                 dictionary.seek(0)
                 break
             else:
@@ -37,12 +37,12 @@ start = time.time()
 try:
     crack(hash_file, dictionary, Algorithms[sys.argv[3]])
 except:
-    print sys.exc_info()[0]
-    print "Supported algorithms: \nmd5\nsha1\nsha224\nsha256\nsha384\nsha512"
+    print(sys.exc_info()[0])
+    print("Supported algorithms: \nmd5\nsha1\nsha224\nsha256\nsha384\nsha512")
 end = time.time()
 elapsedTime = end - start
 
-print "Elapsed time: "+str(elapsedTime)+"s"
+print("Elapsed time: {} sec".format(str(elapsedTime)))
 
 hash_file.close()
 dictionary.close()
